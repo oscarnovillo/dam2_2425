@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.springjavafx.ui.pantallas.principal.PrincipalController">
+    <center>
+        <StackPane prefHeight="150.0" prefWidth="200.0">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
+                <children>
+
+                    <TextField fx:id="txtNormal" layoutX="242.0" layoutY="120.0" />
+                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                </children>
+            </AnchorPane>
+        </StackPane>
+    </center>
+    <top>
+        <MenuBar fx:id="menuPrincipal">
+            <menus>
+                <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New" />
+
+                    </items>
+                </Menu>
+                <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
+                    <items>
+
+                        <MenuItem fx:id="menuItemRedo" mnemonicParsing="false" text="Redo" />
+                        <MenuItem fx:id="menuItemCut" mnemonicParsing="false" text="Cut" />
+                        <MenuItem fx:id="menuItemCopy" mnemonicParsing="false" text="Copy" />
+                        <MenuItem fx:id="menuItemPaste" mnemonicParsing="false" text="Paste" />
+                        <MenuItem fx:id="menuItemDelete" mnemonicParsing="false" text="Delete" />
+                        <MenuItem fx:id="menuItemSelectAll" mnemonicParsing="false" text="Select All" />
+                    </items>
+                </Menu>
+                <Menu fx:id="menuHelp" mnemonicParsing="false"  text="Help">
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>
