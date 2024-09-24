@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import org.example.springjavafx.servicios.ServiciosUsuarios;
+import org.example.springjavafx.domain.servicios.ServiciosUsuarios;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
