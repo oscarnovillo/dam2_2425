@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <View
 
         android:id="@+id/view"
@@ -17,13 +18,13 @@
         android:layout_marginEnd="-8dp"
         android:layout_marginBottom="-8dp"
         android:background="@drawable/back"
-       android:elevation="20dp"
+        android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textoDown"
-        app:layout_constraintEnd_toEndOf="@+id/textoDown"
+        app:layout_constraintEnd_toEndOf="@+id/hello"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textoDown"
         app:layout_constraintTop_toTopOf="@+id/textoUpito"
-        app:layout_constraintVertical_bias="0.32999998" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/hello"
@@ -33,9 +34,10 @@
         android:text="Hello World!"
         app:layout_constraintBottom_toTopOf="@+id/label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintStart_toEndOf="@id/textoUpito"
         app:layout_constraintTop_toBottomOf="@+id/textoUpito"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <EditText
@@ -47,9 +49,11 @@
         android:text="@string/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintHorizontal_bias="0"
+        />
 
     <EditText
         android:id="@+id/textoDown"
@@ -61,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textoUpito"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textoUpito"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.73" />
 
@@ -72,13 +76,14 @@
         android:layout_marginTop="9dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
-        app:layout_constraintHorizontal_bias="0"
+
 
         app:layout_constraintBottom_toTopOf="@+id/textoDown"
-        app:layout_constraintEnd_toEndOf="@+id/textoDown"
-        app:layout_constraintStart_toStartOf="@+id/textoDown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textoDown"
         app:layout_constraintTop_toBottomOf="@+id/hello"
         app:layout_constraintVertical_bias="0.5" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -90,6 +95,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
