@@ -1,0 +1,1 @@
+[{"texto":"asda","grupo":{"nombre":"a","password":"a","usuarios":[{"username":"a","password":"a"},{"username":"b","password":"b"}]}},{"texto":"bbb","grupo":{"nombre":"b","password":"b","usuarios":[{"username":"a","password":"a"}]}},{"texto":"soy b","grupo":{"nombre":"a","password":"a","usuarios":[{"username":"a","password":"a"},{"username":"b","password":"b"}]}}]
