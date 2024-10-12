@@ -1,4 +1,4 @@
-package com.example.viewmodel.ui.pantalllaMain
+package com.example.viewmodel.ui
 
 object Constantes {
 

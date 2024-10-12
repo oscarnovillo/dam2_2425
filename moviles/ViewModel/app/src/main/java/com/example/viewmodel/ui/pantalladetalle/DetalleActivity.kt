@@ -1,4 +1,4 @@
-package com.example.viewmodel.ui.pantalllaMain
+package com.example.viewmodel.ui.pantalladetalle
 
 import android.os.Bundle
 import android.widget.Toast
@@ -10,16 +10,17 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.appnobasica.utils.StringProvider
 import com.example.viewmodel.R
 import com.example.viewmodel.data.Repository
-import com.example.viewmodel.databinding.ActivityMainBinding
+import com.example.viewmodel.databinding.ActivityDetalleBinding
+
 import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 
-class MainActivity : AppCompatActivity() {
+class DetalleActivity : AppCompatActivity() {
 
 
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityDetalleBinding
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
@@ -35,7 +36,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+
+        intent.extras?.let {
+            val persona = it.getParcelable<Persona>(getString(R.string.persona))
+            val idPersona = it.getInt("id")
+            viewModel.getPersonas(idPersona)
+        }
+
+        binding = ActivityDetalleBinding.inflate(layoutInflater).apply {
             setContentView(root)
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -53,16 +61,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observarViewModel() {
-        viewModel.uiState.observe(this@MainActivity) { state ->
+        viewModel.uiState.observe(this@DetalleActivity) { state ->
 
             state.error?.let { error ->
-                Toast.makeText(this@MainActivity, error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetalleActivity, error, Toast.LENGTH_SHORT).show()
                 viewModel.errorMostrado()
             }
 
 
             if (state.error == null)
-                binding.editTextTextPersonName.setText(state.persona?.nombre)
+                binding.editTextTextPersonName.setText(state.persona.nombre)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.viewmodel.ui.pantalllaMain
+package com.example.viewmodel.ui.pantalladetalle
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +9,7 @@ import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
+import com.example.viewmodel.ui.Constantes
 
 class MainViewModel(
     private val stringProvider: StringProvider,
@@ -17,17 +18,17 @@ class MainViewModel(
 ) : ViewModel() {
 
     private var indice =0
-    private val _uiState = MutableLiveData(MainState())
-    val uiState: LiveData<MainState> get() = _uiState
+    private val _uiState = MutableLiveData(DetalleState())
+    val uiState: LiveData<DetalleState> get() = _uiState
 
 
     init {
-        _uiState.value = MainState(persona=this.getPersonas()[0])
+        _uiState.value = DetalleState(persona=this.getPersonas()[0])
     }
 
     fun addPersona(persona: Persona) {
         if (!addPersonaUseCase(persona)) {
-            _uiState.value = MainState(
+            _uiState.value = DetalleState(
                 persona = _uiState.value.let{persona},
                 error = stringProvider.getString(R.string.name),
             )

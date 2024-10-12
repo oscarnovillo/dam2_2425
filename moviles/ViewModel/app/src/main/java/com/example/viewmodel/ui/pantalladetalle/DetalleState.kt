@@ -1,8 +1,8 @@
-package com.example.viewmodel.ui.pantalllaMain
+package com.example.viewmodel.ui.pantalladetalle
 
 import com.example.viewmodel.domain.modelo.Persona
 
-data class MainState(
+data class DetalleState(
     val persona: Persona = Persona(),
     val error: String? = null
 )
