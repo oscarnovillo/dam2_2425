@@ -118,8 +118,8 @@ public class CertBouncy {
                     new Date(System.currentTimeMillis() + 24L * 3600 * 1000),
                     new X500Name("CN=Signing certificate"),
                     SubjectPublicKeyInfo.getInstance(signingKeyPair.getPublic().getEncoded()));
-            certBuilder.addExtension(X509Extension.basicConstraints, true, new BasicConstraints(false));
-            certBuilder.addExtension(X509Extension.keyUsage, true, new KeyUsage(KeyUsage.digitalSignature));
+//            certBuilder.addExtension(X509Extension.basicConstraints, true, new BasicConstraints(false));
+//            certBuilder.addExtension(X509Extension.keyUsage, true, new KeyUsage(KeyUsage.digitalSignature));
             final X509CertificateHolder certHolder = certBuilder
                     .build(new JcaContentSignerBuilder("SHA256withECDSA").setProvider("BC").build(caKey));
             signingCertificate = new JcaX509CertificateConverter().setProvider("BC").getCertificate(certHolder);

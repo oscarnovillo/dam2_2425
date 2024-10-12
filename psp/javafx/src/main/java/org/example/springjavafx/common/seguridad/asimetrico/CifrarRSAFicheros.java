@@ -22,7 +22,7 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static cliente.asimetrico.EjemploRSA.mostrarBytes;
+import static org.example.springjavafx.common.seguridad.asimetrico.EjemploRSA.mostrarBytes;
 
 
 /**

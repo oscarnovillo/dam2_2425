@@ -24,12 +24,17 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class EjemploECDSA {
 
+
+
+
+
     public static void main(String[] args) throws Exception {
         Security.addProvider(new BouncyCastleProvider());
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("EC"); // Hace uso del provider BC
         keyGen.initialize(new ECGenParameterSpec("secp256r1"), new SecureRandom());
         //keyGen.initialize(512);
-
+        // Generar el par de claves
+        KeyPair keyPair2 = keyGen.generateKeyPair();
         X9ECParameters ecp = SECNamedCurves.getByName("secp256r1");
         ECDomainParameters domainParams = new ECDomainParameters(ecp.getCurve(),
                 ecp.getG(), ecp.getN(), ecp.getH(),
