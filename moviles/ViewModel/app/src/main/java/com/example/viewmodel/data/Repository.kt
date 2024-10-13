@@ -5,6 +5,7 @@ import com.example.viewmodel.domain.modelo.Persona
 class Repository {
 
     fun addPersona(persona: Persona) = personas.add(persona)
+    fun delPersona(persona: Persona) = personas.remove(persona)
 
 
     fun getPersonas(): List<Persona> {

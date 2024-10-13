@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.button2.setOnClickListener{
             val intent =  Intent(this, DetalleActivity::class.java)
-            intent.putExtra("id",1)
+            intent.putExtra("id",0)
 
             intent.putExtra(getString(R.string.persona), Persona("nombre","apellidos"))
 

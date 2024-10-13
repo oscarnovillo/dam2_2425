@@ -21,4 +21,7 @@ object RespositoryDos {
     fun getPersonas(): List<Persona> {
         return personas
     }
+
+    fun delPersona(persona: Persona) =
+        personas.remove(persona)
 }

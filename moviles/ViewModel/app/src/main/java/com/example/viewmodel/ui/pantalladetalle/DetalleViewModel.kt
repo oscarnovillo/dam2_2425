@@ -9,39 +9,57 @@ import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
+import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.ui.Constantes
+import com.example.viewmodel.ui.common.UiEvent
+
 
 class MainViewModel(
     private val stringProvider: StringProvider,
     private val addPersonaUseCase: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
-) : ViewModel() {
+    private val deletePersonaUseCase: DeletePersonaUseCase,
 
-    private var indice =0
+    ) : ViewModel() {
+
+    private var indice = 0
     private val _uiState = MutableLiveData(DetalleState())
     val uiState: LiveData<DetalleState> get() = _uiState
 
 
     init {
-        _uiState.value = DetalleState(persona=this.getPersonas()[0])
+        _uiState.value = DetalleState(persona = this.getPersonas()[0])
     }
 
     fun addPersona(persona: Persona) {
         if (!addPersonaUseCase(persona)) {
             _uiState.value = DetalleState(
-                persona = _uiState.value.let{persona},
-                error = stringProvider.getString(R.string.name),
+                persona = _uiState.value.let { persona },
+                event = UiEvent.ShowSnackbar(stringProvider.getString(R.string.name)),
             )
             _uiState.value = _uiState
-                .value?.copy(error = Constantes.ERROR)
+                .value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
         }
+    }
+
+    fun delPersona(persona: Persona) {
+        _uiState.value?.let {
+            if (!deletePersonaUseCase(it.persona)) {
+                _uiState.value = _uiState
+                    .value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+            } else {
+                _uiState.value = _uiState
+                    .value?.copy(event = UiEvent.PopBackStack)
+            }
+        }
+
     }
 
     fun getPersonas(id: Int) {
         val personas = getPersonas()
 
         if (personas.size < id || id < 0) {
-            _uiState.value = _uiState.value?.copy(error = "error")
+            _uiState.value = _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
 
         } else
             _uiState.value = _uiState.value?.copy(persona = personas[id])
@@ -50,7 +68,7 @@ class MainViewModel(
     }
 
     fun errorMostrado() {
-        _uiState.value = _uiState.value?.copy(error = null)
+        _uiState.value = _uiState.value?.copy(event = null)
     }
 
 }
@@ -63,6 +81,7 @@ class MainViewModelFactory(
     private val stringProvider: StringProvider,
     private val addPersona: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
+    private val deletePersonaUseCase: DeletePersonaUseCase,
 
     ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -72,6 +91,7 @@ class MainViewModelFactory(
                 stringProvider,
                 addPersona,
                 getPersonas,
+                deletePersonaUseCase,
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

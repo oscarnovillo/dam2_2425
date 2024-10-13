@@ -14,10 +14,11 @@ import com.example.viewmodel.databinding.ActivityDetalleBinding
 
 import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
+import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
+import com.example.viewmodel.ui.common.UiEvent
 
 class DetalleActivity : AppCompatActivity() {
-
 
 
     private lateinit var binding: ActivityDetalleBinding
@@ -27,10 +28,9 @@ class DetalleActivity : AppCompatActivity() {
             StringProvider.instance(this),
             AddPersonaUseCase(),
             GetPersonas(Repository()),
+            DeletePersonaUseCase(),
         )
     }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +63,17 @@ class DetalleActivity : AppCompatActivity() {
     private fun observarViewModel() {
         viewModel.uiState.observe(this@DetalleActivity) { state ->
 
-            state.error?.let { error ->
-                Toast.makeText(this@DetalleActivity, error, Toast.LENGTH_SHORT).show()
+            state.event?.let { event ->
+                if (event is UiEvent.PopBackStack) {
+                    this@DetalleActivity.finish()
+                } else if (event is UiEvent.ShowSnackbar) {
+                    Toast.makeText(this@DetalleActivity, event.message, Toast.LENGTH_SHORT).show()
+                }
                 viewModel.errorMostrado()
             }
 
 
-            if (state.error == null)
+            if (state.event == null)
                 binding.editTextTextPersonName.setText(state.persona.nombre)
         }
     }
@@ -80,7 +84,9 @@ class DetalleActivity : AppCompatActivity() {
             button.setOnClickListener {
                 viewModel.addPersona(Persona(editTextTextPersonName.text.toString()))
                 viewModel.getPersonas(2)
-
+            }
+            buttonBorrar.setOnClickListener {
+                viewModel.delPersona(viewModel.uiState.value?.persona ?: Persona())
             }
 
         }

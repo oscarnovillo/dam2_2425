@@ -1,4 +1,8 @@
 package com.example.viewmodel.ui.pantalllamain
 
-class MainState {
-}
+import com.example.viewmodel.domain.modelo.Persona
+
+data class MainState(
+    val personas: List<Persona> = emptyList(),
+    val isIrDetalle: Boolean = false,
+)
