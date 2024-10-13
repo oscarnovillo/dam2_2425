@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.appnobasica.utils.StringProvider
+import com.example.viewmodel.ui.common.StringProvider
 import com.example.viewmodel.R
 import com.example.viewmodel.data.Repository
 import com.example.viewmodel.databinding.ActivityDetalleBinding
@@ -23,8 +23,8 @@ class DetalleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleBinding
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
+    private val viewModel: DetalleViewModel by viewModels {
+        DetalleViewModelFactory(
             StringProvider.instance(this),
             AddPersonaUseCase(),
             GetPersonas(Repository()),

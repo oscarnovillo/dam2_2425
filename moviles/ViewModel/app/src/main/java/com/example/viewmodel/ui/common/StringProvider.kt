@@ -1,4 +1,4 @@
-package com.example.appnobasica.utils
+package com.example.viewmodel.ui.common
 
 import android.content.Context
 import androidx.annotation.StringRes

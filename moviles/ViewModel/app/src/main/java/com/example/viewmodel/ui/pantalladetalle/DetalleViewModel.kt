@@ -8,13 +8,13 @@ import com.example.viewmodel.R
 import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
-import com.example.appnobasica.utils.StringProvider
+import com.example.viewmodel.ui.common.StringProvider
 import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.ui.Constantes
 import com.example.viewmodel.ui.common.UiEvent
 
 
-class MainViewModel(
+class DetalleViewModel(
     private val stringProvider: StringProvider,
     private val addPersonaUseCase: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
@@ -77,7 +77,7 @@ class MainViewModel(
 /**
  * Factory class to instantiate the [ViewModel] instance.
  */
-class MainViewModelFactory(
+class DetalleViewModelFactory(
     private val stringProvider: StringProvider,
     private val addPersona: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
@@ -85,9 +85,9 @@ class MainViewModelFactory(
 
     ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(DetalleViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(
+            return DetalleViewModel(
                 stringProvider,
                 addPersona,
                 getPersonas,

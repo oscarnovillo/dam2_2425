@@ -3,19 +3,32 @@ package com.example.viewmodel.ui.pantalllamain
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.viewmodel.R
+import com.example.viewmodel.data.Repository
 
 import com.example.viewmodel.databinding.ActivityMainBinding
 import com.example.viewmodel.domain.modelo.Persona
+import com.example.viewmodel.domain.usecases.personas.GetPersonas
+import com.example.viewmodel.ui.common.MarginItemDecoration
 import com.example.viewmodel.ui.pantalladetalle.DetalleActivity
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter : PersonaAdapter
+
+
+    private val viewModel: MainViewModel by viewModels {
+       MainViewModelFactory(
+            GetPersonas(Repository()),
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +43,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         events()
+        configureRecyclerView()
+        observarState()
+    }
+
+    private fun observarState() {
+        viewModel.uiState.observe(this@MainActivity){ state ->
+            adapter.submitList(state.personas)
+        }
+    }
+
+    private fun configureRecyclerView() {
+
+        adapter = PersonaAdapter()
+
+        binding.listaPersonas.layoutManager = LinearLayoutManager(this)
+
+        binding.listaPersonas.adapter = adapter
+
+       binding.listaPersonas.addItemDecoration(MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.margin)))
     }
 
     private fun events() {
