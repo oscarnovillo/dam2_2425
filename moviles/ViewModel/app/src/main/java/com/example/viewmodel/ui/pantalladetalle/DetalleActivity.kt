@@ -84,7 +84,7 @@ class DetalleActivity : AppCompatActivity() {
 
         with(binding) {
             button.setOnClickListener {
-                viewModel.addPersona(Persona(editTextTextPersonName.text.toString()))
+                viewModel.addPersona(Persona(nombre = editTextTextPersonName.text.toString()))
                 viewModel.getPersonas(2)
             }
             buttonBorrar.setOnClickListener {

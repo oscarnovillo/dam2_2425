@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter : PersonaAdapter
+    private lateinit var adapter: PersonaAdapter
 
 
     private val viewModel: MainViewModel by viewModels {
-       MainViewModelFactory(
+        MainViewModelFactory(
             GetPersonas(Repository()),
         )
     }
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observarState() {
-        viewModel.uiState.observe(this@MainActivity){ state ->
+        viewModel.uiState.observe(this@MainActivity) { state ->
             adapter.submitList(state.personas)
             //adapter.notifyDataSetChanged()
         }
@@ -61,24 +61,45 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureRecyclerView() {
 
-        adapter = PersonaAdapter()
+        adapter = PersonaAdapter(itemClick = { persona ->
+            navigateToDetail(persona.id)
+
+        },
+            actions = object : PersonaAdapter.PersonasActions {
+                override fun onItemClick(persona: Persona) {
+                    navigateToDetail(persona.id)
+                }
+
+            })
 
         binding.listaPersonas.layoutManager = LinearLayoutManager(this)
 
         binding.listaPersonas.adapter = adapter
 
-        binding.listaPersonas.addItemDecoration(MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.margin)))
+        binding.listaPersonas.addItemDecoration(
+            MarginItemDecoration(
+                resources.getDimensionPixelSize(
+                    R.dimen.margin
+                )
+            )
+        )
+    }
+
+
+    private fun navigateToDetail(id: Int) {
+        val intent = Intent(this, DetalleActivity::class.java)
+        intent.putExtra("id", id)
+
+        intent.putExtra(getString(R.string.persona), Persona(0,"nombre", "apellidos"))
+
+        startActivity(intent)
+
     }
 
     private fun events() {
 
-        binding.button2.setOnClickListener{
-            val intent =  Intent(this, DetalleActivity::class.java)
-            intent.putExtra("id",0)
-
-            intent.putExtra(getString(R.string.persona), Persona("nombre","apellidos"))
-
-            startActivity(intent)
+        binding.button2.setOnClickListener {
+            navigateToDetail(1)
 
         }
     }

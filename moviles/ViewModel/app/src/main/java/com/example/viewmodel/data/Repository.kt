@@ -13,9 +13,9 @@ class Repository {
     }
 
     init {
-        personas.add(Persona("Juanito"))
-        personas.add(Persona("Jorgito"))
-        personas.add(Persona("Jaimito"))
+        personas.add(Persona(1,"Juanito"))
+        personas.add(Persona(2,"Jorgito"))
+        personas.add(Persona(3,"Jaimito"))
     }
 
     companion object {

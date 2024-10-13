@@ -24,7 +24,7 @@ class DetalleViewModel(
     ) : ViewModel() {
 
     private var indice = 0
-    private val _uiState : MutableLiveData<DetalleState> = MutableLiveData(null)
+    private val _uiState: MutableLiveData<DetalleState> = MutableLiveData(null)
     val uiState: LiveData<DetalleState> get() = _uiState
 
 
@@ -59,11 +59,20 @@ class DetalleViewModel(
     fun getPersonas(id: Int) {
         val personas = getPersonas()
 
-        if (personas.size < id || id < 0) {
-            _uiState.value = _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+        val persona = personas.find { it.id == id }
+
+        if (persona == null) {
+            if (personas.size < id || id < 0) {
+                _uiState.value =
+                    _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+            }
+            else
+                _uiState.value =
+                    _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
 
         } else
-            _uiState.value = _uiState.value?.copy(persona = personas[id]) ?: DetalleState(personas[id])
+
+            _uiState.value = _uiState.value?.copy(persona = persona) ?: DetalleState(persona)
 
 
     }

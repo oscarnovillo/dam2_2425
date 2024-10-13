@@ -9,12 +9,16 @@ import com.example.viewmodel.domain.modelo.Persona
 
 
 
-class PersonaAdapter() : ListAdapter<Persona, PersonaItemViewholder>(DiffCallback()) {
+class PersonaAdapter(
+    val itemClick: (Persona) -> Unit,
+    val actions : PersonasActions,
+) : ListAdapter<Persona, PersonaItemViewholder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonaItemViewholder {
         return PersonaItemViewholder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.persona_view, parent, false),
+            actions,
             )
     }
 
@@ -28,11 +32,16 @@ class PersonaAdapter() : ListAdapter<Persona, PersonaItemViewholder>(DiffCallbac
     // clase para la animacion al cambiar datos del adapter
     class DiffCallback : DiffUtil.ItemCallback<Persona>() {
         override fun areItemsTheSame(oldItem: Persona, newItem: Persona): Boolean {
-            return oldItem.nombre == newItem.nombre
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Persona, newItem: Persona): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface PersonasActions {
+        fun onItemClick(persona: Persona)
+
     }
 }

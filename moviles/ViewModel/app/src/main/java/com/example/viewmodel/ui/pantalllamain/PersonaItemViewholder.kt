@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.viewmodel.databinding.PersonaViewBinding
 import com.example.viewmodel.domain.modelo.Persona
 
-class PersonaItemViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PersonaItemViewholder(itemView: View,val actions:PersonaAdapter.PersonasActions) : RecyclerView.ViewHolder(itemView) {
 
     private val binding = PersonaViewBinding.bind(itemView)
 
@@ -22,7 +22,8 @@ class PersonaItemViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) 
                 true
             }
             itemView.setOnClickListener {
-               //actions.onItemClick(item)
+
+               actions.onItemClick(item)
             }
         }
     }
