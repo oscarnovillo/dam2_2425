@@ -19,7 +19,7 @@ object RespositoryDos {
 
 
     fun getPersonas(): List<Persona> {
-        return personas
+        return personas.toList()
     }
 
     fun delPersona(persona: Persona) =

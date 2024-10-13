@@ -62,19 +62,21 @@ class DetalleActivity : AppCompatActivity() {
 
     private fun observarViewModel() {
         viewModel.uiState.observe(this@DetalleActivity) { state ->
-
-            state.event?.let { event ->
-                if (event is UiEvent.PopBackStack) {
-                    this@DetalleActivity.finish()
-                } else if (event is UiEvent.ShowSnackbar) {
-                    Toast.makeText(this@DetalleActivity, event.message, Toast.LENGTH_SHORT).show()
+            state?.let {
+                state.event?.let { event ->
+                    if (event is UiEvent.PopBackStack) {
+                        this@DetalleActivity.finish()
+                    } else if (event is UiEvent.ShowSnackbar) {
+                        Toast.makeText(this@DetalleActivity, event.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    viewModel.errorMostrado()
                 }
-                viewModel.errorMostrado()
+
+
+                if (state.event == null)
+                    binding.editTextTextPersonName.setText(state.persona.nombre)
             }
-
-
-            if (state.event == null)
-                binding.editTextTextPersonName.setText(state.persona.nombre)
         }
     }
 
@@ -86,7 +88,7 @@ class DetalleActivity : AppCompatActivity() {
                 viewModel.getPersonas(2)
             }
             buttonBorrar.setOnClickListener {
-                viewModel.delPersona(viewModel.uiState.value?.persona ?: Persona())
+                viewModel.delPersona(viewModel.uiState.value?.persona)
             }
 
         }

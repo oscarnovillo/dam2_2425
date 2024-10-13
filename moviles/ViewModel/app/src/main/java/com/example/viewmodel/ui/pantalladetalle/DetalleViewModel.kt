@@ -12,6 +12,7 @@ import com.example.viewmodel.ui.common.StringProvider
 import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.ui.Constantes
 import com.example.viewmodel.ui.common.UiEvent
+import com.example.viewmodel.ui.pantalllamain.MainState
 
 
 class DetalleViewModel(
@@ -23,12 +24,12 @@ class DetalleViewModel(
     ) : ViewModel() {
 
     private var indice = 0
-    private val _uiState = MutableLiveData(DetalleState())
+    private val _uiState : MutableLiveData<DetalleState> = MutableLiveData(null)
     val uiState: LiveData<DetalleState> get() = _uiState
 
 
     init {
-        _uiState.value = DetalleState(persona = this.getPersonas()[0])
+        //_uiState.value = DetalleState(persona = this.getPersonas()[0])
     }
 
     fun addPersona(persona: Persona) {
@@ -42,7 +43,7 @@ class DetalleViewModel(
         }
     }
 
-    fun delPersona(persona: Persona) {
+    fun delPersona(persona: Persona?) {
         _uiState.value?.let {
             if (!deletePersonaUseCase(it.persona)) {
                 _uiState.value = _uiState
@@ -62,7 +63,7 @@ class DetalleViewModel(
             _uiState.value = _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
 
         } else
-            _uiState.value = _uiState.value?.copy(persona = personas[id])
+            _uiState.value = _uiState.value?.copy(persona = personas[id]) ?: DetalleState(personas[id])
 
 
     }

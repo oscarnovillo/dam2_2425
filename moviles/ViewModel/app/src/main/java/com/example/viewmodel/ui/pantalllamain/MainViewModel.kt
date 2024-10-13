@@ -15,11 +15,12 @@ class MainViewModel(
     val uiState: LiveData<MainState> get() = _uiState
 
     init {
-
-        _uiState.value = _uiState.value?.copy(personas = getPersonas())
+        getPersonas()
     }
 
-    fun getPersonas() = getPersonas.invoke()
+    fun getPersonas() {
+        _uiState.value = _uiState.value?.copy(personas = getPersonas.invoke())
+    }
 
 
 }

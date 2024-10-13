@@ -47,9 +47,15 @@ class MainActivity : AppCompatActivity() {
         observarState()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getPersonas()
+    }
+
     private fun observarState() {
         viewModel.uiState.observe(this@MainActivity){ state ->
             adapter.submitList(state.personas)
+            //adapter.notifyDataSetChanged()
         }
     }
 
@@ -61,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.listaPersonas.adapter = adapter
 
-       binding.listaPersonas.addItemDecoration(MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.margin)))
+        binding.listaPersonas.addItemDecoration(MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.margin)))
     }
 
     private fun events() {

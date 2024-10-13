@@ -4,6 +4,6 @@ import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.ui.common.UiEvent
 
 data class DetalleState(
-    val persona: Persona = Persona(),
+    val persona: Persona,
     val event: UiEvent? = null
 )
