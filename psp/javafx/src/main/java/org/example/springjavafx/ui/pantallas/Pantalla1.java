@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class Pantalla1 {
@@ -52,13 +54,31 @@ public class Pantalla1 {
         alert.showAndWait();
     }
 
-    public void crearCertificados(ActionEvent actionEvent) throws NoSuchAlgorithmException, InterruptedException {
+    public void crearCertificados(ActionEvent actionEvent) throws NoSuchAlgorithmException, InterruptedException, ExecutionException {
         pane.setCursor(javafx.scene.Cursor.WAIT);
 
-        //createCertificateUseCase.execute();
+
+       // createCertificateUseCase.execute().complete("Certificados creados");
+        createCertificateUseCase.execute().thenRunAsync(() -> {
+            System.out.println("fin");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    pane.setCursor(javafx.scene.Cursor.DEFAULT);
+                    System.out.println("fin");
+            txtNormal.setText("Certificados creados");
+
+        }
+        ).handleAsync((aVoid, throwable) -> {
+            System.out.println("handle");
+            return "hola";
+        });
 
 
-        //pane.setCursor(javafx.scene.Cursor.DEFAULT);
+
+
 
 
 
