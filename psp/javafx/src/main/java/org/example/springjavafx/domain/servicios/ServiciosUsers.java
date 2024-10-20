@@ -4,7 +4,7 @@ import org.example.springjavafx.domain.modelo.Usuario;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiciosUsuarios {
+public class ServiciosUsers {
 
 
     public String getNombreUsuario() {
