@@ -17,20 +17,15 @@ import com.example.viewmodel.domain.usecases.personas.AddPersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.viewmodel.ui.common.UiEvent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetalleActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityDetalleBinding
 
-    private val viewModel: DetalleViewModel by viewModels {
-        DetalleViewModelFactory(
-            StringProvider.instance(this),
-            AddPersonaUseCase(),
-            GetPersonas(Repository()),
-            DeletePersonaUseCase(),
-        )
-    }
+    private val viewModel: DetalleViewModel by viewModels ()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

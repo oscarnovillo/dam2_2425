@@ -1,8 +1,9 @@
 package com.example.viewmodel.data
 
 import com.example.viewmodel.domain.modelo.Persona
+import javax.inject.Inject
 
-class Repository {
+class Repository @Inject constructor(){
 
     fun addPersona(persona: Persona) = personas.add(persona)
     fun delPersona(persona: Persona) = personas.remove(persona)

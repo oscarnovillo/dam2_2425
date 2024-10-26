@@ -16,7 +16,9 @@ import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.viewmodel.ui.common.MarginItemDecoration
 import com.example.viewmodel.ui.pantalladetalle.DetalleActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 
@@ -24,11 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: PersonaAdapter
 
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
-            GetPersonas(Repository()),
-        )
-    }
+    private val viewModel: MainViewModel by viewModels ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.viewmodel.ui.pantalladetalle.DetalleViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val getPersonas: GetPersonas,
 ) : ViewModel() {
 

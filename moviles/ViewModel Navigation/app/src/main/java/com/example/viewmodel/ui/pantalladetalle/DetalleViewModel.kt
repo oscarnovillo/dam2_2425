@@ -13,9 +13,13 @@ import com.example.viewmodel.domain.usecases.personas.DeletePersonaUseCase
 import com.example.viewmodel.ui.Constantes
 import com.example.viewmodel.ui.common.UiEvent
 import com.example.viewmodel.ui.pantalllamain.MainState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 
-class DetalleViewModel(
+@HiltViewModel
+class DetalleViewModel @Inject constructor(
     private val stringProvider: StringProvider,
     private val addPersonaUseCase: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
