@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:icon="@drawable/ic_home_24"
+        android:title="main"
+        android:contentDescription="listado"
+        app:showAsAction="always"
+         />
+
+    <item
+        android:id="@+id/personasFragment"
+        android:title="personas"
+        android:icon="@drawable/baseline_person_24"
+
+        android:contentDescription="sumar"
+
+        app:showAsAction="always"
+         />
+
+
+    <item
+        android:id="@+id/detalleFragment"
+        android:icon="@drawable/baseline_palette_24"
+
+        android:title="detalle"
+        android:contentDescription="listado"
+        app:showAsAction="always"
+        />
+</menu>
