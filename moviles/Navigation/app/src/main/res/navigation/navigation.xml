@@ -15,8 +15,8 @@
         android:name="com.example.navigation.ui.personas.PersonasFragment"
         android:label="Personas Fragment" />
     <fragment
-        android:id="@+id/detalleFragment"
-        android:name="com.example.navigation.ui.personas.DetalleFragment"
-        android:label="fragment_detalle"
-        tools:layout="@layout/fragment_detalle" />
+        android:id="@+id/otraFragment"
+        android:name="com.example.navigation.ui.personas.OtraFragment"
+        android:label="otra fragment"
+        tools:layout="@layout/fragment_otra" />
 </navigation>

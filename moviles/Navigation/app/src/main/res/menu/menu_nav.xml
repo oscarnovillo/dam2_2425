@@ -22,10 +22,10 @@
 
 
     <item
-        android:id="@+id/detalleFragment"
+        android:id="@+id/otraFragment"
         android:icon="@drawable/baseline_palette_24"
 
-        android:title="detalle"
+        android:title="otra"
         android:contentDescription="listado"
         app:showAsAction="always"
         />
