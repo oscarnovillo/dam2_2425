@@ -32,7 +32,7 @@ class PersonasFragment : Fragment() {
                 findNavController().navigate(action)
             }
             buttonDetalle.setOnClickListener {
-                findNavController().navigate(PersonasFragmentDirections.actionPersonasFragmentToDetalleFragment2("34"))
+                //findNavController().navigate(PersonasFragmentDirections.actionPersonasFragmentToDetalleFragment2("34"))
             }
         }
     }

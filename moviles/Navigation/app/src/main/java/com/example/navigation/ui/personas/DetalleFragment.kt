@@ -1,13 +1,13 @@
 package com.example.navigation.ui.personas
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.navigation.R
-import com.example.navigation.databinding.FragmentAddPersonaBinding
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.navigation.databinding.FragmentDetalleBinding
+import com.example.navigation.ui.mainFragment.MainFragment
 
 
 class DetalleFragment : Fragment() {
@@ -26,7 +26,12 @@ class DetalleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
+            button.setOnClickListener {
+                // navigate to add fragment
+                findNavController().navigateUp()
+                findNavController().navigate(DetalleFragmentDirections.actionMainFragmentToMiFragment(2) )
+            }
 
         }
     }

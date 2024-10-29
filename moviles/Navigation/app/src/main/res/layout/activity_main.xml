@@ -6,33 +6,33 @@
     android:id="@+id/main"
 
     tools:context=".ui.main.MainActivity">
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
 
-        android:id="@+id/coordinatorLayout"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="0dp">
+<!--        android:id="@+id/coordinatorLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_height="0dp">-->
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:liftOnScroll="true"
-            app:layout_scrollFlags="scroll|enterAlways"
-            >
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:liftOnScroll="true"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways"-->
+<!--            >-->
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/menu_appbar_search"
+<!--            <com.google.android.material.appbar.MaterialToolbar-->
+<!--                android:id="@+id/topAppBar"-->
+<!--                style="@style/Widget.MaterialComponents.Toolbar.Primary"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                app:menu="@menu/menu_appbar_search"-->
 
-                />
+<!--                />-->
 
-        </com.google.android.material.appbar.AppBarLayout>
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -42,29 +42,29 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:navGraph="@navigation/navigation"
+        app:navGraph="@navigation/vacio_temp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@id/coordinatorLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavView"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        app:labelVisibilityMode="labeled"-->
 
 
-        app:itemIconTint="?attr/colorOnSecondary"
+<!--        app:itemIconTint="?attr/colorOnSecondary"-->
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragmentContainerView"
-        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
-        app:menu="@menu/menu_nav" />
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/fragmentContainerView"-->
+<!--        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"-->
+<!--        app:menu="@menu/menu_nav" />-->
 
 
 

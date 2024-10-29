@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/personasFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.navigation.ui.mainFragment.MainFragment"
-        android:label="Main"
-        tools:layout="@layout/fragment_main" />
+
     <fragment
         android:id="@+id/personasFragment"
         android:name="com.example.navigation.ui.personas.PersonasFragment"
@@ -18,10 +14,7 @@
             android:id="@+id/action_personasFragment_to_addPersonaFragment"
             app:destination="@id/addPersonaFragment"
             app:popUpTo="@id/navigation" />
-        <action
-            android:id="@+id/action_personasFragment_to_detalleFragment2"
-            app:destination="@id/detalleFragment2"
-            app:popUpTo="@id/navigation" />
+
     </fragment>
     <fragment
         android:id="@+id/otraFragment"
@@ -33,13 +26,5 @@
         android:name="com.example.navigation.ui.personas.AddPersonaFragment"
         android:label="fragment_add_persona"
         tools:layout="@layout/fragment_add_persona" />
-    <fragment
-        android:id="@+id/detalleFragment2"
-        android:name="com.example.navigation.ui.personas.DetalleFragment"
-        android:label="fragment_detalle"
-        tools:layout="@layout/fragment_detalle" >
-        <argument
-            android:name="id"
-            app:argType="string" />
-    </fragment>
+
 </navigation>

@@ -34,23 +34,23 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            val navHost =
-                supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-            navController = navHost.navController
-            // setup bottom bar with navigation
-            binding.bottomNavView.setupWithNavController(navController)
-
-
-            // indica que topAppBar es la barra de navegacion del activity
-           setSupportActionBar(topAppBar)
-
-            // indica que hacer cuando se presiona el boton de navegacion
-            topAppBar.setNavigationOnClickListener {
-                navController.navigateUp()
-            }
-
-            // cambia el topappbar segun la navegacion
-            setupActionBarWithNavController(navController)
+//            val navHost =
+//                supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+//            navController = navHost.navController
+//            // setup bottom bar with navigation
+//            binding.bottomNavView.setupWithNavController(navController)
+//
+//
+//            // indica que topAppBar es la barra de navegacion del activity
+//           setSupportActionBar(topAppBar)
+//
+//            // indica que hacer cuando se presiona el boton de navegacion
+//            topAppBar.setNavigationOnClickListener {
+//                navController.navigateUp()
+//            }
+//
+//            // cambia el topappbar segun la navegacion
+//            setupActionBarWithNavController(navController)
 
         }
     }
