@@ -36,7 +36,17 @@ class DetalleViewModel @Inject constructor(
         //_uiState.value = DetalleState(persona = this.getPersonas()[0])
     }
 
-    fun addPersona(persona: Persona) {
+    fun handleEvent(event: DetalleEvent) {
+        when (event) {
+            is DetalleEvent.AddPersona -> addPersona(event.persona)
+            is DetalleEvent.DeletePersona -> delPersona(event.persona)
+            is DetalleEvent.GetPersona -> getPersonas(event.id)
+            DetalleEvent.ErrorMostrado -> errorMostrado()
+        }
+    }
+
+
+    private fun addPersona(persona: Persona) {
         if (!addPersonaUseCase(persona)) {
             _uiState.value = DetalleState(
                 persona = _uiState.value.let { persona },
@@ -47,7 +57,7 @@ class DetalleViewModel @Inject constructor(
         }
     }
 
-    fun delPersona(persona: Persona?) {
+    private fun delPersona(persona: Persona?) {
         _uiState.value?.let {
             if (!deletePersonaUseCase(it.persona)) {
                 _uiState.value = _uiState
@@ -60,7 +70,7 @@ class DetalleViewModel @Inject constructor(
 
     }
 
-    fun getPersonas(id: Int) {
+    private fun getPersonas(id: Int) {
         val personas = getPersonas()
 
         val persona = personas.find { it.id == id }
@@ -81,7 +91,7 @@ class DetalleViewModel @Inject constructor(
 
     }
 
-    fun errorMostrado() {
+    private fun errorMostrado() {
         _uiState.value = _uiState.value?.copy(event = null)
     }
 

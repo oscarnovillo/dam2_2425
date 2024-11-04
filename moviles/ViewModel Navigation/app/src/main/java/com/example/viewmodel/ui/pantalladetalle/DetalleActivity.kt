@@ -35,7 +35,7 @@ class DetalleActivity : AppCompatActivity() {
         intent.extras?.let {
             val persona = it.getParcelable<Persona>(getString(R.string.persona))
             val idPersona = it.getInt("id")
-            viewModel.getPersonas(idPersona)
+            viewModel.handleEvent(DetalleEvent.GetPersona(idPersona))
         }
 
         binding = ActivityDetalleBinding.inflate(layoutInflater).apply {
@@ -65,7 +65,7 @@ class DetalleActivity : AppCompatActivity() {
                         Toast.makeText(this@DetalleActivity, event.message, Toast.LENGTH_SHORT)
                             .show()
                     }
-                    viewModel.errorMostrado()
+                    viewModel.handleEvent(DetalleEvent.ErrorMostrado)
                 }
 
 
@@ -79,11 +79,16 @@ class DetalleActivity : AppCompatActivity() {
 
         with(binding) {
             button.setOnClickListener {
-                viewModel.addPersona(Persona(nombre = editTextTextPersonName.text.toString()))
-                viewModel.getPersonas(2)
+                viewModel.handleEvent(
+                    DetalleEvent.AddPersona(Persona(nombre = editTextTextPersonName.text.toString())
+                    ))
+                viewModel.handleEvent(DetalleEvent.GetPersona(2))
             }
             buttonBorrar.setOnClickListener {
-                viewModel.delPersona(viewModel.uiState.value?.persona)
+
+                viewModel.uiState.value?.persona?.let {
+                    viewModel.handleEvent(DetalleEvent.DeletePersona(it))
+                }
             }
 
         }
