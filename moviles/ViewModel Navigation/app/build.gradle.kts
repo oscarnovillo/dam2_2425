@@ -67,6 +67,11 @@ dependencies {
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
 
+    //retrofit
+    implementation(libs.bundles.retrofit)
+
+    //coil
+    implementation(libs.coil)
 
     //Logs
     implementation(libs.timber)

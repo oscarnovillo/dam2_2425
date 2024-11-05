@@ -1,9 +1,9 @@
 [versions]
 activityKtx = "1.9.2"
 agp = "8.6.1"
-kotlin = "1.9.23"
-kotlinPlugin = "1.9.23"
-ksp = "1.9.23-1.0.20"
+kotlin = "1.9.24"
+kotlinPlugin = "1.9.24"
+ksp = "1.9.24-1.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -43,8 +43,10 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
-
+[bundles]
+retrofit = ["retrofit", "converter-gson", "converter-scalars", "logging-interceptor"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
