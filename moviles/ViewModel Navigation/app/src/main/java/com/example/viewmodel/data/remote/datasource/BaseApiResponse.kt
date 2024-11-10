@@ -1,6 +1,6 @@
 package com.example.viewmodel.data.remote.datasource
 
-import com.example.primerxmlmvvm.data.remote.NetworkResult
+import com.example.viewmodel.data.remote.NetworkResult
 import retrofit2.Response
 
 abstract class BaseApiResponse {

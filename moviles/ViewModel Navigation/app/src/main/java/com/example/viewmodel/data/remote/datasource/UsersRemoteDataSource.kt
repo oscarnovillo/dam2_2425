@@ -1,6 +1,6 @@
 package com.example.viewmodel.data.remote.datasource
 
-import com.example.primerxmlmvvm.data.remote.NetworkResult
+import com.example.viewmodel.data.remote.NetworkResult
 import com.example.viewmodel.data.remote.modelo.toUser
 import com.example.primerxmlmvvm.di.IoDispatcher
 import com.example.viewmodel.domain.modelo.User
@@ -14,7 +14,7 @@ class UsersRemoteDataSource @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : BaseApiResponse() {
     suspend fun fetchUsers(): NetworkResult<List<User>?> =
-        safeApiCall { userService.getUsers() }.map { lista ->
+        safeApiCall { userService.getUsers("8") }.map { lista ->
             lista?.map { it.toUser() }
         }
 

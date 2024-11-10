@@ -1,4 +1,4 @@
-package com.example.primerxmlmvvm.data.remote
+package com.example.viewmodel.data.remote
 
 import retrofit2.Response
 
@@ -37,8 +37,8 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T
                 return NetworkResult.Success(body)
             }
         }
-        return error("${response.code()} ${response.message()}")
+        return NetworkResult.Error("${response.code()} ${response.message()}")
     } catch (e: Exception) {
-        return error(e.message ?: e.toString())
+        return NetworkResult.Error(e.message ?: e.toString())
     }
 }

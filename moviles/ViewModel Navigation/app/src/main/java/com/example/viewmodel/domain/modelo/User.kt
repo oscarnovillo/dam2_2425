@@ -14,3 +14,7 @@ data class User(
     val website: String,
     var fotoUrl: String = "https://thispersondoesnotexist.com/",
 )
+fun User.toPersona() : Persona =
+    Persona(id,username,fotoUrl)
+
+
