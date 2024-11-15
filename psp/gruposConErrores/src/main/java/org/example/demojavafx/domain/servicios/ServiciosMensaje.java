@@ -1,5 +1,6 @@
 package org.example.demojavafx.domain.servicios;
 
+import io.vavr.control.Either;
 import org.example.demojavafx.data.DaoMensajes;
 import org.example.demojavafx.domain.modelo.Mensaje;
 import org.example.demojavafx.domain.modelo.User;
@@ -44,6 +45,34 @@ public class ServiciosMensaje {
 
         // desencriptare la clave simetrica con mi clave privada
 
+
+    }
+
+    private Either<ErrorApp,List<Message>> desencriptarMensajes(List<Message> mensajes, String pwd) {
+
+        // Usamos un Stream para procesar los mensajes
+        List<Either<ErrorApp, Message>> result = mensajes.stream()
+                .map(message -> decryptMessage(message, pwd)) // Desencriptamos cada mensaje
+                .toList(); // Recopilamos los resultados en una lista
+
+        // Verificamos si hay errores en la lista de resultados
+        List<ErrorApp> errors = result.stream()
+                .filter(Either::isLeft) // Filtramos los mensajes con error
+                .map(Either::getLeft) // Extraemos los errores
+                .toList();
+
+        if (!errors.isEmpty()) {
+            // Si encontramos algún error, devolvemos el primer error
+            return Either.left(errors.getFirst());
+        }
+
+        // Si no hubo errores, devolvemos los mensajes desencriptados
+        List<Message> validMessages = result.stream()
+                .filter(Either::isRight) // Filtramos los mensajes exitosos
+                .map(Either::get) // Extraemos los mensajes
+                .toList();
+
+        return Either.right(validMessages); // Devolvemos la lista de mensajes exitosos
 
     }
 
