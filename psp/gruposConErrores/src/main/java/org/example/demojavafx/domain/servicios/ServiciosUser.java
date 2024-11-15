@@ -33,7 +33,18 @@ public class ServiciosUser {
     public Either<ErrorApp,Boolean> registerUser(User user) {
         return userValidator.validateUser(user)
                 .flatMap(ok -> userValidator.validatePassword(user))
+                .flatMap(ok -> generarClavesUsuario(user))
                 .flatMap(ok -> daoUsers.registerUser(user));
+
+    }
+
+    private Either<ErrorApp,Boolean> generarClavesUsuario(User user) {
+
+        // Generar claves de usuario
+
+
+        return Either.right(true);
+
 
     }
 }

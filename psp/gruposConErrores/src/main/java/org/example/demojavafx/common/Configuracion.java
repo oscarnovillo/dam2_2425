@@ -16,6 +16,8 @@ public class Configuracion {
     private String pathJsonUsuarios;
     private String pathJsonGrupos;
     private String pathJsonMensajes;
+    private String pathToKeyStore;
+    private String passwordKeyStore;
 
     private static Configuracion configuracion;
 
@@ -38,6 +40,8 @@ public class Configuracion {
             this.pathJsonUsuarios = p.getProperty("pathJsonUsuarios");
             this.pathJsonGrupos = p.getProperty("pathJsonGrupos");
             this.pathJsonMensajes = p.getProperty("pathJsonMensajes");
+            this.pathToKeyStore = p.getProperty("pathToKeyStore");
+            this.passwordKeyStore = p.getProperty("passwordKeyStore");
 
         } catch (IOException e) {
             log.error(e.getMessage(),e);
