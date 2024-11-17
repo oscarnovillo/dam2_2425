@@ -2,6 +2,7 @@ package com.example.viewmodel.domain.modelo
 
 import com.example.primerxmlmvvm.data.remote.modelo.Address
 import com.example.primerxmlmvvm.data.remote.modelo.Company
+import com.example.viewmodel.data.remote.NetworkResult
 
 data class User(
     val address: String,
@@ -16,5 +17,13 @@ data class User(
 )
 fun User.toPersona() : Persona =
     Persona(id,username,fotoUrl)
+
+
+fun User.validate() =
+
+    if (this.name.isBlank())
+        NetworkResult.Error("User blank")
+    else
+        NetworkResult.Success(this)
 
 

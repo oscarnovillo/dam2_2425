@@ -18,7 +18,7 @@ class UsersRepository @Inject constructor(
 
 
 
-    suspend fun fetchUsers(): NetworkResult<List<User>?> {
+    suspend fun fetchUsers(): NetworkResult<List<User>> {
 
         return usersRemoteDataSource.fetchUsers()
 
@@ -31,7 +31,7 @@ class UsersRepository @Inject constructor(
             if (response.isSuccessful) {
                 val body = response.body()
                 body?.let {
-                    return NetworkResult.Success(body.toUser())
+                    return body.toUser()
                 }
             }
             return error("${response.code()} ${response.message()}")

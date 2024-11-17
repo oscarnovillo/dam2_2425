@@ -52,6 +52,15 @@ class MainFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.personas)
+
+            state.event?.let { event ->
+                if (event is UiEvent.ShowSnackbar) {
+                    Toast.makeText(this@MainFragment.requireContext(), event.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+                viewModel.eventConsumido()
+            }
+
             //adapter.notifyDataSetChanged()
 
         }

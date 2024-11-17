@@ -2,6 +2,7 @@ package com.example.viewmodel.ui.pantalllamain
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.viewmodel.databinding.ActivityMainBinding
 import com.example.viewmodel.domain.modelo.Persona
 import com.example.viewmodel.domain.usecases.personas.GetPersonas
 import com.example.viewmodel.ui.common.MarginItemDecoration
+import com.example.viewmodel.ui.common.UiEvent
 import com.example.viewmodel.ui.pantalladetalle.DetalleActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,7 +55,13 @@ class MainActivity : AppCompatActivity() {
     private fun observarState() {
         viewModel.uiState.observe(this@MainActivity) { state ->
             adapter.submitList(state.personas)
-            //adapter.notifyDataSetChanged()
+            state.event?.let { event ->
+                if (event is UiEvent.ShowSnackbar) {
+                    Toast.makeText(this@MainActivity, event.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+                viewModel.eventConsumido()
+            }
         }
     }
 
