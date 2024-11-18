@@ -7,6 +7,7 @@ import com.example.viewmodel.data.remote.datasource.UsersRemoteDataSource
 import com.example.viewmodel.data.remote.modelo.toUser
 import com.example.viewmodel.domain.modelo.User
 import kotlinx.coroutines.CoroutineDispatcher
+import retrofit2.HttpException
 
 import javax.inject.Inject
 
@@ -34,8 +35,14 @@ class UsersRepository @Inject constructor(
                     return body.toUser()
                 }
             }
+            else
+            {
+                response.errorBody()
+                return error("${response.code()} ${response.message()}")
+            }
             return error("${response.code()} ${response.message()}")
         } catch (e: Exception) {
+
             return error(e.message ?: e.toString())
         }
 

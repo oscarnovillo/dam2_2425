@@ -26,6 +26,10 @@ class MainViewModel @Inject constructor(
     init {
         getPersonas()
     }
+
+
+
+
     fun getPersonas() {
 
         viewModelScope.launch {
@@ -42,8 +46,6 @@ class MainViewModel @Inject constructor(
 
                 }
             }
-
-
         }
 
     }

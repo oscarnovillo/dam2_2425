@@ -19,6 +19,7 @@ fun User.toPersona() : Persona =
     Persona(id,username,fotoUrl)
 
 
+
 fun User.validate() =
 
     if (this.name.isBlank())

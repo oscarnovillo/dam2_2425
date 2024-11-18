@@ -11,7 +11,6 @@ sealed class NetworkResult<T>(
 
     class Loading<T> : NetworkResult<T>()
 
-
     inline fun <R> map( transform :(data: T) -> R) : NetworkResult<R> =
         when(this){
             is Error -> Error(message)

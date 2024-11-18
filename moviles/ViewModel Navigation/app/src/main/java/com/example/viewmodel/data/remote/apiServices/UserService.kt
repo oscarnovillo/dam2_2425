@@ -2,8 +2,11 @@ package com.example.viewmodel.data.remote.apiServices
 
 import com.example.viewmodel.data.remote.modelo.UserRemote
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -19,6 +22,12 @@ interface UserService {
 
     @GET("/users/{id}")
     suspend fun getUser(@Path("id") id : Int) : Response<UserRemote>
+
+    @POST("/users")
+    suspend fun postUser(@Body user: UserRemote) : Response<UserRemote>
+
+    @PUT("/users/{id}")
+    suspend fun putUser(@Path("id") id : Int,@Body user: UserRemote) : Response<UserRemote>
 
 
     @DELETE("/users/{id}")
