@@ -17,6 +17,7 @@ import com.example.viewmodel.ui.Constantes.HOLA_Q_TAL
 import com.example.viewmodel.ui.common.MarginItemDecoration
 import com.example.viewmodel.ui.common.UiEvent
 import com.example.viewmodel.ui.pantalladetalle.DetalleEvent
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -55,7 +56,7 @@ class MainFragment : Fragment() {
 
             state.event?.let { event ->
                 if (event is UiEvent.ShowSnackbar) {
-                    Toast.makeText(this@MainFragment.requireContext(), event.message, Toast.LENGTH_SHORT)
+                    Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 viewModel.eventConsumido()
