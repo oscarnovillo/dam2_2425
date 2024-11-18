@@ -22,7 +22,7 @@
 
 
     <item
-        android:id="@+id/otraFragment"
+        android:id="@+id/otraFragment2"
         android:icon="@drawable/baseline_palette_24"
 
         android:title="otra"

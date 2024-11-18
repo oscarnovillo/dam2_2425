@@ -39,18 +39,18 @@ class MainActivity : AppCompatActivity() {
             navController = navHost.navController
             // setup bottom bar with navigation
             binding.bottomNavigationView.setupWithNavController(navController)
-//
-//
-//            // indica que topAppBar es la barra de navegacion del activity
-//           setSupportActionBar(topAppBar)
-//
-//            // indica que hacer cuando se presiona el boton de navegacion
-//            topAppBar.setNavigationOnClickListener {
-//                navController.navigateUp()
-//            }
-//
-//            // cambia el topappbar segun la navegacion
-//            setupActionBarWithNavController(navController)
+
+
+            // indica que topAppBar es la barra de navegacion del activity
+           setSupportActionBar(topAppBar)
+
+            // indica que hacer cuando se presiona el boton de navegacion
+            topAppBar.setNavigationOnClickListener {
+                navController.navigateUp()
+            }
+
+            // cambia el topappbar segun la navegacion
+            setupActionBarWithNavController(navController)
 
         }
     }

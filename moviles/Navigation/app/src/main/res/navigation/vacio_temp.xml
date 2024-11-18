@@ -26,5 +26,10 @@
             android:id="@+id/action_miFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/otraFragment2"
+        android:name="com.example.navigation.ui.personas.OtraFragment"
+        android:label="fragment_otra"
+        tools:layout="@layout/fragment_otra" />
 
 </navigation>
