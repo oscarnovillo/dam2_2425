@@ -12,6 +12,9 @@ import com.example.viewmodel.domain.usecases.personas.GetUsers
 import com.example.viewmodel.ui.common.UiEvent
 import com.example.viewmodel.ui.pantalladetalle.DetalleViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,8 +24,8 @@ class MainViewModel @Inject constructor(
     private val getPersonas: GetPersonas,
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData(MainState())
-    val uiState: LiveData<MainState> get() = _uiState
+    private val _uiState = MutableStateFlow(MainState())
+    val uiState = _uiState.asStateFlow()
     init {
         getPersonas()
     }
@@ -33,16 +36,17 @@ class MainViewModel @Inject constructor(
     fun getPersonas() {
 
         viewModelScope.launch {
+            _uiState.update { it.copy(event = UiEvent.ShowSnackbar("TSTING")) }
             when (val result =getUsers.invoke())
             {
-                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(event = UiEvent.ShowSnackbar(result.message), isLoading = false)
-                is NetworkResult.Loading -> _uiState.value = _uiState.value?.copy(isLoading = true)
+                is NetworkResult.Error -> _uiState.update { it.copy(event = UiEvent.ShowSnackbar(result.message), isLoading = false)}
+                is NetworkResult.Loading -> _uiState.update {it.copy(isLoading = true)}
                 is NetworkResult.Success -> {
 
                     val personas = result.data.map{ it.toPersona() }.toList()
 
-                    _uiState.value = _uiState.value?.copy(personas = personas,
-                        isLoading = false)
+                    _uiState.update{ it.copy(personas = personas,
+                        isLoading = false)}
 
                 }
             }
@@ -52,7 +56,8 @@ class MainViewModel @Inject constructor(
 
     fun eventConsumido()
     {
-        _uiState.value = _uiState.value?.copy(event = null)
+        _uiState.update {it.copy(event = null)}
     }
+
 }
 

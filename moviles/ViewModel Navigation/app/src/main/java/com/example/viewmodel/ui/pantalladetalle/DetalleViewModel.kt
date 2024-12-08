@@ -15,6 +15,10 @@ import com.example.viewmodel.ui.common.UiEvent
 import com.example.viewmodel.ui.pantalllamain.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 
@@ -28,13 +32,16 @@ class DetalleViewModel @Inject constructor(
     ) : ViewModel() {
 
     private var indice = 0
-    private val _uiState: MutableLiveData<DetalleState> = MutableLiveData(null)
-    val uiState: LiveData<DetalleState> get() = _uiState
+    private val _uiState = MutableStateFlow(DetalleState(Persona(nombre = "inicio")))
+    val uiState: StateFlow<DetalleState> get() = _uiState.asStateFlow()
+
 
 
     init {
-        //_uiState.value = DetalleState(persona = this.getPersonas()[0])
+        _uiState.update{ it.copy(persona = this.getPersonas()[0])}
     }
+
+
 
     fun handleEvent(event: DetalleEvent) {
         when (event) {
@@ -52,22 +59,22 @@ class DetalleViewModel @Inject constructor(
                 persona = _uiState.value.let { persona },
                 event = UiEvent.ShowSnackbar(stringProvider.getString(R.string.name)),
             )
-            _uiState.value = _uiState
-                .value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+            _uiState.update {
+                it.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR)) }
         }
     }
 
     private fun delPersona(persona: Persona?) {
-        _uiState.value?.let {
-            if (!deletePersonaUseCase(it.persona)) {
-                _uiState.value = _uiState
-                    .value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
-            } else {
-                _uiState.value = _uiState
-                    .value?.copy(event = UiEvent.PopBackStack)
-            }
-        }
 
+            if (!deletePersonaUseCase(_uiState.value.persona)) {
+                _uiState.update {
+                    it.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+                }
+            } else {
+                _uiState.update {
+                    it.copy(event = UiEvent.PopBackStack)
+                }
+            }
     }
 
     private fun getPersonas(id: Int) {
@@ -77,12 +84,13 @@ class DetalleViewModel @Inject constructor(
 
         if (persona == null) {
             if (personas.size < id || id < 0) {
-                _uiState.value =
-                    _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+                _uiState.update {
+                    it.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))}
             }
             else
-                _uiState.value =
-                    _uiState.value?.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+                _uiState.update {
+                    it.copy(event = UiEvent.ShowSnackbar(Constantes.ERROR))
+                }
 
         } else
 
@@ -92,7 +100,7 @@ class DetalleViewModel @Inject constructor(
     }
 
     private fun errorMostrado() {
-        _uiState.value = _uiState.value?.copy(event = null)
+        _uiState.update {it.copy(event = null)}
     }
 
 }

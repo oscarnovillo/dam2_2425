@@ -51,20 +51,20 @@ class MainFragment : Fragment() {
 
 
     private fun observarState() {
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            adapter.submitList(state.personas)
-
-            state.event?.let { event ->
-                if (event is UiEvent.ShowSnackbar) {
-                    Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-                viewModel.eventConsumido()
-            }
-
-            //adapter.notifyDataSetChanged()
-
-        }
+//        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+//            adapter.submitList(state.personas)
+//
+//            state.event?.let { event ->
+//                if (event is UiEvent.ShowSnackbar) {
+//                    Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT)
+//                        .show()
+//                }
+//                viewModel.eventConsumido()
+//            }
+//
+//            //adapter.notifyDataSetChanged()
+//
+//        }
     }
 
     private fun configureRecyclerView() {
