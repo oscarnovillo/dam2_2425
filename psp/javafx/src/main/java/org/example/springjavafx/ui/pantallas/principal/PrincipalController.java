@@ -29,6 +29,9 @@ public class PrincipalController {
         cargarPantalla("/fxml/pantalla1.fxml");
     }
 
+
+
+
     private Pane cargarPantalla(String ruta) {
         Pane panePantalla = null;
         try {
