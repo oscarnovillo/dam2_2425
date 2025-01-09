@@ -88,6 +88,9 @@ public class MainAesTestIVRandomMAC {
 
         System.out.println(originalString);
         System.out.println(encryptedString);
+        String encryptedString2 = encrypt(originalString, sSecretKey);
+        System.out.println(encryptedString2);
+        System.out.printf(decrypt(encryptedString2, sSecretKey));
         System.out.println(decryptedString);
     }
 }

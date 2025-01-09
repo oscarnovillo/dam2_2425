@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import org.example.springjavafx.domain.servicios.ServiciosUsuarios;
+import org.example.springjavafx.domain.servicios.ServiciosUsers;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -13,21 +13,24 @@ import java.io.IOException;
 @Component
 public class PrincipalController {
 
-    private final ServiciosUsuarios serviciosUsuarios;
+    private final ServiciosUsers serviciosUsers;
     private final ApplicationContext context;
     @FXML
     public BorderPane root;
 
-    public PrincipalController(ServiciosUsuarios serviciosUsuarios, ApplicationContext context) {
-        this.serviciosUsuarios = serviciosUsuarios;
+    public PrincipalController(ServiciosUsers serviciosUsers, ApplicationContext context) {
+        this.serviciosUsers = serviciosUsers;
         this.context = context;
     }
 
 
     public void initialize() {
-        System.out.println(serviciosUsuarios.getNombreUsuario());
+        System.out.println(serviciosUsers.getNombreUsuario());
         cargarPantalla("/fxml/pantalla1.fxml");
     }
+
+
+
 
     private Pane cargarPantalla(String ruta) {
         Pane panePantalla = null;
