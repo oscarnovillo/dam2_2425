@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ViewModel</string>
+    <string name="name">name</string>
+    <string name="noelementos">no hay suficientes elementos</string>
+    <string name="radiobutton">RadioButton</string>
+    <string name="delete">delete</string>
+    <string name="persona">persona\n</string>
+</resources>

@@ -1,1 +1,27 @@
-[{"nombre":"a","password":"a","usuarios":[{"username":"a","password":"a"},{"username":"b","password":"b"}]},{"nombre":"b","password":"b","usuarios":[{"username":"a","password":"a"}]}]
+[
+  {
+    "nombre": "a",
+    "password": "aadssdfvasvnasjkñfvbuip237878dwcnwef6y913e890y3ebuiosdc",
+    "clave" : "mimamamemima",
+    "usuarios": [
+      {
+        "username": "a",
+        "password": "a"
+      },
+      {
+        "username": "b",
+        "password": "b"
+      }
+    ]
+  },
+  {
+    "nombre": "b",
+    "password": "b",
+    "usuarios": [
+      {
+        "username": "a",
+        "password": "a"
+      }
+    ]
+  }
+]

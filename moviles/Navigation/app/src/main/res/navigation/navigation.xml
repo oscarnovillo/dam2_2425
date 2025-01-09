@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/personasFragment">
+
+
+    <fragment
+        android:id="@+id/personasFragment"
+        android:name="com.example.navigation.ui.personas.PersonasFragment"
+        android:label="Personas Fragment" >
+        <action
+            android:id="@+id/action_personasFragment_to_addPersonaFragment"
+            app:destination="@id/addPersonaFragment"
+            app:popUpTo="@id/navigation" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/otraFragment"
+        android:name="com.example.navigation.ui.personas.OtraFragment"
+        android:label="otra fragment"
+        tools:layout="@layout/fragment_otra" />
+    <fragment
+        android:id="@+id/addPersonaFragment"
+        android:name="com.example.navigation.ui.personas.AddPersonaFragment"
+        android:label="fragment_add_persona"
+        tools:layout="@layout/fragment_add_persona" />
+
+</navigation>
