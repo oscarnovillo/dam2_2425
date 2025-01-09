@@ -40,7 +40,7 @@ public class BouncyCastleCertificateWithBuilder {
             keyStore.load(null, password);
 
             // Guardar la clave privada y el certificado en el keystore
-            keyStore.setKeyEntry("alias2", keyPair.getPrivate(), password, new Certificate[]{certificate});
+            keyStore.setKeyEntry("servidor", keyPair.getPrivate(), password, new Certificate[]{certificate});
 
             // Guardar el keystore en un archivo
             try (FileOutputStream fos = new FileOutputStream("keystore.jks")) {

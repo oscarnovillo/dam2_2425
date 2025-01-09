@@ -50,6 +50,18 @@ public class ServiciosMensaje {
 
     private Either<ErrorApp,List<Message>> desencriptarMensajes(List<Message> mensajes, String pwd) {
 
+
+        List<Message> mensajesDesencriptados = new ArrayList<>();
+
+        for (Message mensaje : mensajes) {
+            Either<ErrorApp, Message> result = decryptMessage(mensaje, pwd);
+            if (result.isLeft()) {
+                return Either.left(result.getLeft());
+            }
+            else
+
+
+        }
         // Usamos un Stream para procesar los mensajes
         List<Either<ErrorApp, Message>> result = mensajes.stream()
                 .map(message -> decryptMessage(message, pwd)) // Desencriptamos cada mensaje
