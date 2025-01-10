@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:attr="bgcolor=${today}">
+
+<h1 th:text="${mensaje}" th:if="${numero > 5}"> JOJOJO </h1>
+<table border=1>
+<tr th:each="equipo: ${equipos}">
+    <td th:text="${equipo.id}" />
+    <td th:text="${equipo.estadio}" />
+    <td >
+
+        <form >
+            <input type="hidden" name="id" th:value="${equipo.id}" />
+            <button type="submit">Eliminar</button>
+        </form>
+    </td>
+
+</tr>
+</table>
+
+<select >
+    <option th:each="equipo : ${equipos}" th:value="${equipo.id}" th:text="${equipo.nombre}">
+    </option>
+</select>
+</body>
+</html>
