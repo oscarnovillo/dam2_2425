@@ -20,7 +20,11 @@ public class FilterLogin implements Filter {
         HttpSession session = httpRequest.getSession(false);
 
         if (session == null || session.getAttribute(LoginServlet.USER) == null) {
-            ((HttpServletResponse)servletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED,"QUE TE DEN");
+            //((HttpServletResponse)servletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED,"QUE TE DEN");
+          ((HttpServletResponse)servletResponse).sendRedirect(httpRequest.getContextPath() + "/login.html");
+//            RequestDispatcher dispatcher = httpRequest.getServletContext()
+//                    .getRequestDispatcher("/login.html");
+//            dispatcher.forward(httpRequest, servletResponse);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
