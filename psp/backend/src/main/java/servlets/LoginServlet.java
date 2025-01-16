@@ -1,5 +1,7 @@
 package servlets;
 
+import domain.ServiciosExample;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,13 +15,20 @@ public class LoginServlet extends HttpServlet {
 
     public static final String USER = "user";
 
+    private ServiciosExample serviciosExample;
+
+    @Inject
+    public LoginServlet(ServiciosExample serviciosExample) {
+        this.serviciosExample = serviciosExample;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String nombre = req.getParameter("nombre");
         String password = req.getParameter("password");
 
-        if (nombre.equals("andres") && password.equals("andres")) {
+        if (serviciosExample.login(nombre, password)) {
             //session insert
             req.getSession().setAttribute(USER, nombre);
 
