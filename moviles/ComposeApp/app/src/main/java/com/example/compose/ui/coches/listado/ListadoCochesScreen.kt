@@ -52,7 +52,7 @@ fun ListadoCochesScreen(
 
 
     ) {
-    var ui = rememberSaveable() { }
+
     val uiState by listadoViewModel.uiState.collectAsState()
     var undo by remember { mutableStateOf(false) }
 

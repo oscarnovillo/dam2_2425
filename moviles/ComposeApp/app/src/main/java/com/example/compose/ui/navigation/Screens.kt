@@ -47,7 +47,7 @@ object ListadoCoches : AppMainBottomDestination {
 }
 
 object ListadoUsers : AppMainBottomDestination {
-    override val route = "listadoUsers"
+    override val route = UsersDestination
     override val title = "Users"
     override val onBottomBar = true
     override val icon = Icons.Outlined.Build

@@ -8,5 +8,8 @@ object SumarDestination
 @Serializable
 object CochesDestination
 
+@Serializable
+object UsersDestination
+
 
 

@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun Navigation() {
+fun Navigation2() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -44,6 +44,7 @@ fun Navigation() {
         Sumar(navigateToCoches = { navController.navigate(CochesDestination)})
         composable<CochesDestination>
         {
+
             ListadoCochesScreen(
                 onNavigateDetalle = {
                     navController.navigate("${DetalleCoche.route}/$it")
@@ -64,7 +65,7 @@ fun Navigation() {
 
 
 @Composable
-fun NavigationGenerico()
+fun Navigation()
 {
     val navController = rememberNavController()
 
@@ -156,9 +157,8 @@ fun NavigationGenerico()
                 )
 
             }
-            composable(
-                ListadoUsers.route
-            ) {
+            composable< UsersDestination>
+            {
                 ListadoUsersScreen(
 
                     onNavigateDetalle = {
