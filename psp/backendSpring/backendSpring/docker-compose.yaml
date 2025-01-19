@@ -1,0 +1,19 @@
+
+services:
+  redis:
+    image: redis:latest
+#    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: clase
+      REDIS_PORT: 6379
+      REDIS_DATABASES: 1
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: clase
+      MYSQL_DATABASE: demo
+    ports:
+      - "3306:3306"
