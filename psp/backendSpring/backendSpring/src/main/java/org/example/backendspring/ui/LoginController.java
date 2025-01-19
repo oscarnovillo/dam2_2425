@@ -43,7 +43,7 @@ public class LoginController {
     @GetMapping("/l")
 
     public String logn(@SessionAttribute("num") Integer num,Model model) {
-        mailComponent.sendMail("oscar.novillo@gmail.com", "hola","hola");
+       // mailComponent.sendMail("oscar.novillo@gmail.com", "hola","hola");
         model.addAttribute("nombre", num);
         return "hola";
     }

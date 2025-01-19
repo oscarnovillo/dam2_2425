@@ -21,6 +21,8 @@ fun BottomBar(
 
 
     ) {
+
+    
     NavigationBar {
         val state = navController.currentBackStackEntryAsState()
 
