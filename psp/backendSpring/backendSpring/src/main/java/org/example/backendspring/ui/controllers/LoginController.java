@@ -20,6 +20,12 @@ public class LoginController {
         this.mailComponent = mailComponent;
     }
 
+    @GetMapping("/plantilla")
+    public String plantilla(Model model) {
+        model.addAttribute("nombre", "Oscar");
+        return "plantilla";
+    }
+
     // getmapping for login
     @GetMapping("/login")
     @Validated
@@ -28,11 +34,11 @@ public class LoginController {
 
         Integer num = (Integer)session.getAttribute("num");
 
-            if (num == null) {
-                num = 0;
-            }
-            num++;
-            session.setAttribute("num", num);
+        if (num == null) {
+            num = 0;
+        }
+        num++;
+        session.setAttribute("num", num);
 
         model.addAttribute("nombre", num);
         return "hola";
@@ -43,7 +49,7 @@ public class LoginController {
     @GetMapping("/l")
 
     public String logn(@SessionAttribute("num") Integer num,Model model) {
-       // mailComponent.sendMail("oscar.novillo@gmail.com", "hola","hola");
+        // mailComponent.sendMail("oscar.novillo@gmail.com", "hola","hola");
         model.addAttribute("nombre", num);
         return "hola";
     }

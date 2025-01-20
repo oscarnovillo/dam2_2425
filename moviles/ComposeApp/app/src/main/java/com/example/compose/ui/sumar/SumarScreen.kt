@@ -59,7 +59,7 @@ fun SumarScreen(
     LaunchedEffect(uiError) {
         uiError?.let {
             showSnackbar(it)
-            sumaViewModel.handleEvent(SumaEvent.ErrorMostrado)
+            //sumaViewModel.handleEvent(SumaEvent.ErrorMostrado)
         }
     }
 
@@ -132,6 +132,7 @@ fun SumarContent(
 )
 @Composable
 fun PreviewSumarScreen() {
+
     var uiState = SumaState(1, 1, null)
-    SumarContent(contador = 1, incremento = 1, onIncrementoChange = {}, onSumar = { })
+    SumarContent(contador = 21, incremento = 10, onIncrementoChange = {}, onSumar = { })
 }

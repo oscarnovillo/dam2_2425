@@ -69,6 +69,7 @@ fun MainScreen() {
     }
 }
 
+
 @Composable
 fun MainScreenPortrait(
     texto :String ,

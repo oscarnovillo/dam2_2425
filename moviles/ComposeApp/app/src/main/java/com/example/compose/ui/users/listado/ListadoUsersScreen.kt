@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import com.example.compose.domain.modelo.User
 import com.example.compose.ui.common.SwipeToDeleteContainer
@@ -49,11 +51,9 @@ fun ListadoUsersScreen(
 
 
     ) {
-    val uiState by listadoViewModel.uiState.collectAsState()
+    val uiState by listadoViewModel.uiState.collectAsStateWithLifecycle()
 
-
-
-    LaunchedEffect(Unit) {
+    LaunchedEffect(key1 = Unit) {
         listadoViewModel.handleEvent(ListadoEvent.GetUsers)
     }
 
@@ -104,7 +104,10 @@ fun ListadoContent(
                 )
         }
     } else {
+        val listState = rememberLazyListState()
+
         LazyColumn(
+            state = listState,
             modifier = Modifier
 
                 .fillMaxSize()

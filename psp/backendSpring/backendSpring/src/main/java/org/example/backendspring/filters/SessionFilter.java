@@ -15,7 +15,6 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-
 public class SessionFilter extends OncePerRequestFilter {
     private Logger logger = LoggerFactory.getLogger(SessionFilter.class);
     @Override
@@ -36,4 +35,8 @@ public class SessionFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         return "/login".equals(path);
     }
+
+
+
+
 }

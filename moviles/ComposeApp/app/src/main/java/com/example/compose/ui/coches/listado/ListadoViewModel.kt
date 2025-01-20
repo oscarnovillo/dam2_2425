@@ -48,6 +48,7 @@ class ListadoViewModel @Inject constructor(
     private val _selectMode = MutableStateFlow(SelectMode())
 
 
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<ListadoState> =
         combine(
