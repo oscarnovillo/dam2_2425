@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.compose.ui.coches.detalle.DetalleCochesScreen
 import com.example.compose.ui.coches.listado.ListadoCochesScreen
 import com.example.compose.ui.common.BottomBar
@@ -41,13 +42,14 @@ fun Navigation2() {
         startDestination = SumarDestination,
 
     ) {
+
         Sumar(navigateToCoches = { navController.navigate(CochesDestination)})
         composable<CochesDestination>
         {
 
             ListadoCochesScreen(
-                onNavigateDetalle = {
-                    navController.navigate("${DetalleCoche.route}/$it")
+                onNavigateDetalle = { cocheId ->
+                    navController.navigate(DetalleCocheDestination(cocheId))
                 },
                 showSnackbar = { mensaje, onUndo ->
 
@@ -55,6 +57,19 @@ fun Navigation2() {
 
                 )
 
+        }
+        composable<DetalleCocheDestination>
+        { navbackstackentry ->
+            val detalle = navbackstackentry.toRoute() as DetalleCocheDestination
+            DetalleCochesScreen(
+                cocheMatricula = detalle.matricula,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                showSnackbar = { mensaje ->
+
+                },
+            )
         }
     }
 

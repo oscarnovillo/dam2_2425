@@ -11,5 +11,8 @@ object CochesDestination
 @Serializable
 object UsersDestination
 
+@Serializable
+data class DetalleCocheDestination(val matricula: String)
+
 
 
