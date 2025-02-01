@@ -3,6 +3,7 @@ package com.example.compose.ui.sumar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.compose.R
+import com.example.compose.data.PreferencesRepository
 
 import com.example.primerxmlmvvm.common.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ import kotlin.random.Random
 @HiltViewModel
 class SumaViewModel @Inject constructor(
     private val stringProvider: StringProvider,
+    private val preferencesRepository: PreferencesRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SumaState(0,1,null))
@@ -60,6 +62,9 @@ class SumaViewModel @Inject constructor(
 
     private fun sumar(incremento:Int) {
         operacion(Int::plus, incremento)
+        viewModelScope.launch {
+            preferencesRepository.saveUserName(_uiState.value.contador.toString())
+        }
     }
 
     private fun restar(incremento : Int) {

@@ -11,7 +11,7 @@ data class ScaffoldState(
 )
 
 data class TopBarState(
-    val arrangement: Arrangement.Horizontal = Arrangement.Center,
+    val arrangement: Arrangement.Horizontal = Arrangement.Start,
     val actions : @Composable RowScope.() -> Unit = {},
     val showNavigationIcon : Boolean = true,
     )

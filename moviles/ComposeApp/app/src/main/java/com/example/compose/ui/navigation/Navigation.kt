@@ -1,5 +1,10 @@
 package com.example.compose.ui.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -14,8 +19,11 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.Navigation
@@ -112,7 +120,7 @@ fun Navigation()
     val state by navController.currentBackStackEntryAsState()
 
     val screen = appDestinationList.find { screen ->
-        state?.destination?.route == screen.route
+        state?.destination?.route == screen.route::class.qualifiedName
     }
 
 
@@ -124,9 +132,20 @@ fun Navigation()
         navController = navController,
         screen = screen
     ) }
+
+    var isBottomBarVisible by rememberSaveable{mutableStateOf(true)}
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
-        bottomBar = bottomBar,
+        bottomBar = {AnimatedVisibility(
+            visible = isBottomBarVisible,
+            enter = fadeIn() + slideInVertically(initialOffsetY = { it }),
+            exit = fadeOut() + slideOutVertically(targetOffsetY = { it })
+        ) {
+            BottomBar(
+                navController = navController,
+                screens = appDestinationList
+            )
+        }},
         topBar = topBar,
         floatingActionButton = {
             if (screen?.scaffoldState?.fabVisible == true) {
@@ -149,6 +168,7 @@ fun Navigation()
                 route = DetalleCoche.routeWithArgs,
                 arguments = DetalleCoche.arguments
             ) {
+//                isBottomBarVisible = false
                 DetalleCochesScreen(
                     cocheMatricula = it.arguments?.getString(DetalleCoche.cocheIdArg) ?: "",
                     onNavigateBack = {
@@ -161,6 +181,7 @@ fun Navigation()
             }
             composable<CochesDestination>
             {
+                isBottomBarVisible = true
                 ListadoCochesScreen(
                     onNavigateDetalle = {
                         navController.navigate("${DetalleCoche.route}/$it")

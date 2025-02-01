@@ -92,7 +92,8 @@ dependencies {
 
     implementation(libs.timber)
 
-
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
 
     //Retrofit
     implementation (libs.retrofit)

@@ -41,7 +41,7 @@ fun DetalleCochesScreen(
 
     ) {
     val uiState by detalleViewModel.uiState.collectAsStateWithLifecycle()
-
+    val userName by detalleViewModel.userName.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         detalleViewModel.handleEvent(DetalleEvent.GetCoche(cocheMatricula))
@@ -50,6 +50,7 @@ fun DetalleCochesScreen(
     DetalleContent(
         coche = uiState.coche,
         onDelete = { detalleViewModel.handleEvent(DetalleEvent.DelCoche) },
+        username = userName,
 
 
         )
@@ -70,6 +71,7 @@ fun DetalleCochesScreen(
 @Composable
 fun DetalleContent(
     coche: Coche?,
+    username: String,
     onDelete: () -> Unit = {},
 ) {
 
@@ -83,6 +85,8 @@ fun DetalleContent(
                     modifier = Modifier.weight(0.93f)
                     .fillMaxHeight()
                     ) {
+                    Text(text = username)
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "${coche?.matricula}",
                         style= MaterialTheme.typography.bodyLarge)
                     Spacer(modifier = Modifier.height(8.dp))
@@ -129,7 +133,8 @@ fun PreviewDetalleCoche() {
                 fechaMatriculacion = LocalDate.now(),
                 km = 100
             ),
-            onDelete = {}
+            onDelete = {},
+            username = "",
         )
     }
 }
