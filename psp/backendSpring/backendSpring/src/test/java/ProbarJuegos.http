@@ -1,0 +1,32 @@
+###
+GET http://localhost:8080/loginToken?
+    nombre=oscar&password=1234
+
+<> 2025-01-31T130401.200.txt
+
+###
+GET http://localhost:8080/api/juego
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJhZWwgc2Vydmlkb3IiLCJpc3MiOiJTZXJ2aWRvciIsImV4cCI6MTczODkzMDMyOSwidXNlciI6Im9zY2FyIn0.JFy7_6YNpzCAyxWSTHmLHGdc-G2ixIO5flpqnZAnrOM
+
+###
+GET http://localhost:8080/api/juego/77
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJhZWwgc2Vydmlkb3IiLCJpc3MiOiJTZXJ2aWRvciIsImV4cCI6MTczODMyNjgwMiwidXNlciI6Im9zY2FyIn0.GTiIXFk7HGrykSEgX83oULFbglSuObu_86FOIHO2dHc
+
+###
+POST http://localhost:8080/api/juego
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJhZWwgc2Vydmlkb3IiLCJpc3MiOiJTZXJ2aWRvciIsImV4cCI6MTczODkzMDMyOSwidXNlciI6Im9zY2FyIn0.JFy7_6YNpzCAyxWSTHmLHGdc-G2ixIO5flpqnZAnrOM
+Content-Type: application/json
+
+{
+ "nombre":"kkklklsdfsdfsdfk"
+}
+
+###
+PUT http://localhost:8080/api/juego
+Authorization:
+Content-Type: application/json
+
+{
+ "id":77,
+ "nombre":"kkklklsdfsdfsdfk"
+}

@@ -1,14 +1,8 @@
 package com.example.compose.ui.navigation
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -16,8 +10,8 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,7 +20,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -49,9 +42,9 @@ fun Navigation2() {
         navController = navController,
         startDestination = SumarDestination,
 
-    ) {
+        ) {
 
-        Sumar(navigateToCoches = { navController.navigate(CochesDestination)})
+        Sumar(navigateToCoches = { navController.navigate(CochesDestination) })
         composable<CochesDestination>
         {
 
@@ -84,17 +77,13 @@ fun Navigation2() {
 }
 
 
-
-
-
 @Composable
-fun Navigation()
-{
+fun Navigation() {
     val navController = rememberNavController()
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    val showSnackbar = { message:String,showUndo: Boolean,undo:()->Unit  ->
+    val showSnackbar = { message: String, showUndo: Boolean, undo: () -> Unit ->
         scope.launch {
             if (showUndo) {
                 val result = snackbarHostState.showSnackbar(
@@ -105,8 +94,7 @@ fun Navigation()
                 if (result == SnackbarResult.ActionPerformed) {
                     undo()
                 }
-            }
-            else {
+            } else {
                 snackbarHostState.showSnackbar(
                     message,
                     duration = SnackbarDuration.Short
@@ -116,7 +104,6 @@ fun Navigation()
     }
 
 
-
     val state by navController.currentBackStackEntryAsState()
 
     val screen = appDestinationList.find { screen ->
@@ -124,60 +111,74 @@ fun Navigation()
     }
 
 
-    val bottomBar : @Composable () -> Unit ={ BottomBar(
-        navController = navController,
-        screens = appDestinationList
-    ) }
-    val topBar : @Composable () -> Unit = { TopBar(
-        navController = navController,
-        screen = screen
-    ) }
+    val bottomBar: @Composable () -> Unit = {
+        BottomBar(
+            navController = navController,
+            screens = appDestinationList
+        )
+    }
+    val topBar: @Composable () -> Unit = {
+        TopBar(
+            navController = navController,
+            screen = screen
+        )
+    }
 
-    var isBottomBarVisible by rememberSaveable{mutableStateOf(true)}
+    var isBottomBarVisible by rememberSaveable { mutableStateOf(true) }
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
-        bottomBar = {AnimatedVisibility(
-            visible = isBottomBarVisible,
-            enter = fadeIn() + slideInVertically(initialOffsetY = { it }),
-            exit = fadeOut() + slideOutVertically(targetOffsetY = { it })
-        ) {
-            BottomBar(
-                navController = navController,
-                screens = appDestinationList
-            )
-        }},
+        bottomBar = {
+            if (isBottomBarVisible) {
+                BottomBar(
+                    navController = navController,
+                    screens = appDestinationList
+                )
+            } else {
+                Text("BottomBar invisible")
+            }
+        },
         topBar = topBar,
         floatingActionButton = {
             if (screen?.scaffoldState?.fabVisible == true) {
-                FloatingActionButton(onClick = { showSnackbar("FAB CLICKED",false, {}) }) {
+                FloatingActionButton(onClick = { showSnackbar("FAB CLICKED", false, {}) }) {
                     Icon(imageVector = Icons.Rounded.Add, contentDescription = null)
                 }
             }
 
         },
 
-    ) { innerPadding ->
+        ) { innerPadding ->
 
         NavHost(
             navController = navController,
             startDestination = SumarDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
-            Sumar(navigateToCoches = {}, showSnackbar = {showSnackbar(it,false,{})})
+            composable<SumarDestination>(
+            ) {
+                isBottomBarVisible = false
+                SumarScreen(
+                    navigateToCoches ={
+
+                       // navController.popBackStack(SumarDestination, inclusive = false)
+                        navController.navigate(CochesDestination)},
+                    showSnackbar = { },
+                )
+            }
             composable(
                 route = DetalleCoche.routeWithArgs,
                 arguments = DetalleCoche.arguments
             ) {
-//                isBottomBarVisible = false
+                isBottomBarVisible = false
                 DetalleCochesScreen(
                     cocheMatricula = it.arguments?.getString(DetalleCoche.cocheIdArg) ?: "",
                     onNavigateBack = {
                         navController.popBackStack()
                     },
                     showSnackbar = {
-                       showSnackbar(it,false,{})
+                        showSnackbar(it, false, {})
                     },
-                    )
+                )
             }
             composable<CochesDestination>
             {
@@ -186,14 +187,14 @@ fun Navigation()
                     onNavigateDetalle = {
                         navController.navigate("${DetalleCoche.route}/$it")
                     },
-                    showSnackbar = { mensaje,onUndo ->
-                        showSnackbar(mensaje,true,onUndo)
+                    showSnackbar = { mensaje, onUndo ->
+                        showSnackbar(mensaje, true, onUndo)
                     },
 
-                )
+                    )
 
             }
-            composable< UsersDestination>
+            composable<UsersDestination>
             {
                 ListadoUsersScreen(
 
@@ -201,10 +202,10 @@ fun Navigation()
                         navController.navigate("${DetalleUser.route}/$it")
                     },
                     showSnackbar = {
-                        showSnackbar(it,false,{})
+                        showSnackbar(it, false, {})
                     },
 
-                )
+                    )
 
             }
             composable(
@@ -216,8 +217,8 @@ fun Navigation()
                     onNavigateBack = {
                         navController.popBackStack()
                     },
-                    showSnackbar = {mensaje ->
-                        showSnackbar(mensaje,false,{})
+                    showSnackbar = { mensaje ->
+                        showSnackbar(mensaje, false, {})
                     },
                 )
             }
@@ -230,14 +231,14 @@ fun Navigation()
 }
 
 
-
 fun NavGraphBuilder.Sumar(
-    navigateToCoches : () -> Unit,
+    navigateToCoches: () -> Unit,
     showSnackbar: (String) -> Unit = {}
 ) {
     composable<SumarDestination>(
     ) {
-        SumarScreen(navigateToCoches = navigateToCoches,
+        SumarScreen(
+            navigateToCoches = navigateToCoches,
             showSnackbar = showSnackbar
         )
     }

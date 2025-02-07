@@ -20,12 +20,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.compose.R
 import com.example.compose.domain.modelo.Coche
+import com.example.compose.ui.coches.PreferenceViewModel
 import com.example.compose.ui.coches.detalle.DetalleContract.DetalleEvent
 import com.example.compose.ui.common.UiEvent
 import com.example.compose.ui.theme.ComposeAppTheme
@@ -36,12 +39,13 @@ import java.time.LocalDate
 fun DetalleCochesScreen(
     cocheMatricula: String,
     detalleViewModel: DetalleViewModel = hiltViewModel(),
+   preferenceViewModel: PreferenceViewModel = hiltViewModel(),
     onNavigateBack: () -> Unit = {},
     showSnackbar: (String) -> Unit = {},
 
     ) {
     val uiState by detalleViewModel.uiState.collectAsStateWithLifecycle()
-    val userName by detalleViewModel.userName.collectAsStateWithLifecycle()
+    val userName by preferenceViewModel.userName.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         detalleViewModel.handleEvent(DetalleEvent.GetCoche(cocheMatricula))
@@ -86,7 +90,7 @@ fun DetalleContent(
                     .fillMaxHeight()
                     ) {
                     Text(text = username)
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margen)))
                     Text(text = "${coche?.matricula}",
                         style= MaterialTheme.typography.bodyLarge)
                     Spacer(modifier = Modifier.height(8.dp))

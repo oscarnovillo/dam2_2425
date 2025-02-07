@@ -23,9 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetalleViewModel @Inject constructor(
-    val getCoche: GetCoche,
+    private val getCoche: GetCoche,
     val delCoche: DelCoche,
-    val preferencesRepository: PreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     @IoDispatcher val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 

@@ -1,5 +1,8 @@
 package org.example.backendspring.ui.controllers;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotBlank;
 import org.example.backendspring.components.MailComponent;
@@ -11,8 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.security.Key;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Base64;
+import java.util.Date;
 
 @Controller
 public class LoginController {
@@ -44,6 +51,8 @@ public class LoginController {
         num++;
         session.setAttribute("num", num);
 
+
+
         model.addAttribute("nombre", num);
         return "hola";
     }
@@ -54,10 +63,6 @@ public class LoginController {
 
     public String logn(@SessionAttribute("num") Integer num,Model model) {
 
-        Juego j = new Juego();
-
-        System.out.println(j.getNombre()
-                );
         byte []salt = new byte[16];
         SecureRandom sr = new SecureRandom();
         sr.nextBytes(salt);
