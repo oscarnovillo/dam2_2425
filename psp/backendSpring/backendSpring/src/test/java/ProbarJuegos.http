@@ -2,11 +2,14 @@
 GET http://localhost:8080/loginToken?
     nombre=oscar&password=1234
 
+> {%
+    client.global.set("token", response.body)
+%}
 <> 2025-01-31T130401.200.txt
 
 ###
 GET http://localhost:8080/api/juego
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJhZWwgc2Vydmlkb3IiLCJpc3MiOiJTZXJ2aWRvciIsImV4cCI6MTczODkzMDMyOSwidXNlciI6Im9zY2FyIn0.JFy7_6YNpzCAyxWSTHmLHGdc-G2ixIO5flpqnZAnrOM
+Authorization: Bearer {{token}}
 
 ###
 GET http://localhost:8080/api/juego/77
@@ -23,7 +26,7 @@ Content-Type: application/json
 
 ###
 PUT http://localhost:8080/api/juego
-Authorization:
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {

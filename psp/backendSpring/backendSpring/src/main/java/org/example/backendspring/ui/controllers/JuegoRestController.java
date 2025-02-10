@@ -3,6 +3,7 @@ package org.example.backendspring.ui.controllers;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.server.PathParam;
+import org.example.backendspring.domain.servicios.ServiciosJuegos;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,13 @@ import static org.springframework.aot.hint.TypeReference.listOf;
 @RestController
 @RequestMapping("/api/juego")
 public class JuegoRestController {
+
+
+    private final ServiciosJuegos serviciosJuegos;
+
+    public JuegoRestController(ServiciosJuegos serviciosJuegos) {
+        this.serviciosJuegos = serviciosJuegos;
+    }
 
     @GetMapping("")
     public List<Juego> getJuego(){
@@ -39,8 +47,8 @@ public class JuegoRestController {
 
     @PutMapping
     public ResponseEntity<Juego> updateJuego(@RequestBody Juego juego){
-
-        return ResponseEntity.status(HttpServletResponse.SC_OK).body(juego);
+        Juego juegoActualizado  = serviciosJuegos.updateJuego(juego);
+        return ResponseEntity.status(HttpServletResponse.SC_OK).body(juegoActualizado);
     }
 
     @DeleteMapping("/{id}")
