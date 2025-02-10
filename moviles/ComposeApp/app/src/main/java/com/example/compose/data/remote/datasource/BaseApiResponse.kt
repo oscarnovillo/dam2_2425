@@ -1,6 +1,7 @@
 package com.example.compose.data.remote.datasource
 
 import com.example.compose.data.remote.NetworkResult
+import com.google.gson.Gson
 import retrofit2.Response
 
 abstract class BaseApiResponse {
@@ -15,6 +16,12 @@ abstract class BaseApiResponse {
                     return NetworkResult.Success(body)
                 }
             }
+
+            response.errorBody()?.let {
+                return error(it.string())
+            }
+
+
             return error("${response.code()} ${response.message()}")
         } catch (e: Exception) {
             return error(e.message ?: e.toString())
