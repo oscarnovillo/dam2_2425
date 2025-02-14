@@ -1,12 +1,8 @@
 package org.example.backendspring.ui.controllers;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotBlank;
 import org.example.backendspring.components.MailComponent;
-import org.example.backendspring.ui.controllers.Juego;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -14,12 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import java.security.Key;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Base64;
-import java.util.Date;
 
 @Controller
 public class LoginController {

@@ -2,16 +2,13 @@ package org.example.backendspring.ui.controllers;
 
 
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.websocket.server.PathParam;
+import org.example.backendspring.domain.modelo.Juego;
 import org.example.backendspring.domain.servicios.ServiciosJuegos;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.aot.hint.TypeReference.listOf;
 
 @RestController
 @RequestMapping("/api/juego")
@@ -31,13 +28,16 @@ public class JuegoRestController {
         return List.of(juego);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Juego> getJuego(@PathVariable Long id){
+        // mirar el secutirycontext
         Juego juego = new Juego();
         juego.setNombre("Juego de prueba "+id);
         return ResponseEntity.ok().body(juego);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Juego> createJuego(@RequestBody Juego juego){
 

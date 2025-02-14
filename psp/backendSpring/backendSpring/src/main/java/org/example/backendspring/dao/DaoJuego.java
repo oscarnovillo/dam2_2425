@@ -1,7 +1,7 @@
 package org.example.backendspring.dao;
 
 import org.example.backendspring.errors.NotFoundException;
-import org.example.backendspring.ui.controllers.Juego;
+import org.example.backendspring.domain.modelo.Juego;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;

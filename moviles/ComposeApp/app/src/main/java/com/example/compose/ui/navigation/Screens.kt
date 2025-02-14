@@ -54,7 +54,7 @@ object ListadoUsers : AppMainBottomDestination {
 }
 
 object DetalleCoche : AppDestination {
-    override val route = "detalleCoche"
+    override val route = DetalleCocheDestination
     override val title = "Detalle Coche"
     const val cocheIdArg = "cocheId"
     val routeWithArgs = "$route/{$cocheIdArg}"

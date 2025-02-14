@@ -3,10 +3,8 @@ package org.example.backendspring.domain.servicios;
 import lombok.RequiredArgsConstructor;
 import org.example.backendspring.dao.DaoJuego;
 import org.example.backendspring.errors.UserValidationException;
-import org.example.backendspring.ui.controllers.Juego;
+import org.example.backendspring.domain.modelo.Juego;
 import org.springframework.stereotype.Service;
-
-import javax.xml.crypto.Data;
 
 @RequiredArgsConstructor
 @Service

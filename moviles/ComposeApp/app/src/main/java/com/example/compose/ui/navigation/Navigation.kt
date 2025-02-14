@@ -165,13 +165,11 @@ fun Navigation() {
                     showSnackbar = { },
                 )
             }
-            composable(
-                route = DetalleCoche.routeWithArgs,
-                arguments = DetalleCoche.arguments
-            ) {
+            composable<DetalleCocheDestination> {
                 isBottomBarVisible = false
+                val detalle = it.toRoute() as DetalleCocheDestination
                 DetalleCochesScreen(
-                    cocheMatricula = it.arguments?.getString(DetalleCoche.cocheIdArg) ?: "",
+                    cocheMatricula = detalle.matricula,
                     onNavigateBack = {
                         navController.popBackStack()
                     },
@@ -185,7 +183,7 @@ fun Navigation() {
                 isBottomBarVisible = true
                 ListadoCochesScreen(
                     onNavigateDetalle = {
-                        navController.navigate("${DetalleCoche.route}/$it")
+                        navController.navigate(DetalleCocheDestination(it))
                     },
                     showSnackbar = { mensaje, onUndo ->
                         showSnackbar(mensaje, true, onUndo)
