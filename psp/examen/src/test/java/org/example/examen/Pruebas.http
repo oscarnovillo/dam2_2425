@@ -1,0 +1,33 @@
+### Testing API
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+"username": "ines",
+"password": "ines"
+}
+> {%
+    client.global.set("token", response.body.accessToken)
+%}
+
+### get alumnos
+GET http://localhost:8080/alumnos
+Authorization: Bearer {{token}}
+
+###
+DELETE http://localhost:8080/alumnos/10
+Authorization: Bearer {{token}}
+
+### get alumnos
+GET http://localhost:8080/ratones
+Authorization: Bearer {{token}}
+
+
+### Testing API
+POST http://localhost:8080/ratones
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nombre": "ines"
+}

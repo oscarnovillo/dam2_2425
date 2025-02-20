@@ -37,10 +37,10 @@ public class TokenController {
         // generar token
         // generar token
         String jwt = Jwts.builder()
-                .setSubject("parael servidor")
-                .setIssuer("Servidor")
+                .setSubject("APROBACION")
+                .setIssuer("EL PUTO AMO")
                 .setExpiration(Date
-                        .from(LocalDateTime.now().plusSeconds(600).atZone(ZoneId.systemDefault())
+                        .from(LocalDateTime.now().plusSeconds(300).atZone(ZoneId.systemDefault())
                                 .toInstant()))
                 .claim("user", nombre)
                 .signWith(key).compact();
